@@ -1,4 +1,8 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import {
+    ChatInputCommandInteraction,
+    MessageFlags,
+    SlashCommandBuilder,
+} from "discord.js";
 import {
     createAudioPlayer,
     createAudioResource,
@@ -17,7 +21,7 @@ const timerCommand = {
             )
     ),
     async execute(interaction: ChatInputCommandInteraction) {
-        await interaction.deferReply();
+        await interaction.deferReply({ flags: MessageFlags.Ephemeral });
         const guildMember = await interaction.guild?.members.fetch(
             interaction.user.id,
         );
