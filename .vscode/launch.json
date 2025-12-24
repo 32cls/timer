@@ -10,6 +10,7 @@
             "request": "launch",
             "name": "Launch Program",
             "envFile": "${workspaceFolder}/.env",
+            "args": "--import=tsx",
             "skipFiles": [
                 "<node_internals>/**"
             ],
