@@ -5,6 +5,6 @@ COPY . /app
 WORKDIR /app 
 
 RUN apk add ffmpeg
-RUN npx pnpm i
+RUN npx pnpm install --frozen-lockfile
 
 CMD [ "node", "--import=tsx", "index.ts" ]
