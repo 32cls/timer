@@ -51,7 +51,7 @@ const timerCommand = {
         connection.subscribe(player);
         setTimeout(
             () => player.play(resource),
-            timeout * 60000,
+            timeout * 10000,
         );
         player.on("stateChange", (oldState, newState) => {
             if (oldState.status == "playing" && newState.status == "idle") {
