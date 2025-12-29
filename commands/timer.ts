@@ -29,13 +29,18 @@ const timerCommand = {
             await interaction.editReply(
                 "User currently not in a voice channel",
             );
+            console.log(
+                `User requested a timer but was not in a voice channel`,
+            );
             return;
         }
         if (!interaction.guildId || !interaction.guild) {
             await interaction.editReply("User not in a guild");
+            console.log(`User requested a timer but was not in a server`);
             return;
         }
         const timeout = interaction.options.getInteger("minutes", true);
+        console.log(`Received request for timer to ring in ${timeout} minutes`);
         await interaction.editReply(
             `Joining voice channel: <#${guildMember.voice.channelId}>. Ringing in ${timeout} minute${
                 timeout === 1 ? "" : "s"
@@ -50,8 +55,11 @@ const timerCommand = {
         const player = createAudioPlayer();
         connection.subscribe(player);
         setTimeout(
-            () => player.play(resource),
-            timeout * 10000,
+            () => {
+                console.log("Playing timer sound");
+                player.play(resource);
+            },
+            timeout * 60000,
         );
         player.on("stateChange", (oldState, newState) => {
             if (oldState.status == "playing" && newState.status == "idle") {
